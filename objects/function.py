@@ -2,22 +2,18 @@ class Function(object):
     """
     Represents a .func file
 
-    This is designed to be created and read from. You should never call
-    any of it's member functions.
-
     text - text passed into the constructor
-    name - the name of the function, as it will be used in the .auto file
-    constructors - a list containing 2 strings that are inserted into C++
-                   source code as constructors for tne periodic and init
-                   functions.
-    args - A list of all args. Example:
-           [["Distance", "dist"], ["Angle", "angle"]]
-    init_code - the literal C++ code that should bi in the init function
-    periodic_code - the literal C++ code that should be in the periodic
-                    function
-    includes - A list of everything that needs to be included. Strings in
-               this list will most likely be enclosed in quotes or angle
-               brackets
+    get_name() - the name of the function, as it will be used in the .auto file
+    get_constructors() - a list containing 2 strings that are inserted into C++
+                         source code as constructors for tne periodic and init
+                         functions.
+    get_args() - A list of all args. Example:
+                 [["Distance", "dist"], ["Angle", "angle"]]
+    get_section_code() - the literal C++ code that should be in a section
+    get_section() - The text in a section
+    get_includes() - A list of everything that needs to be included. Strings in
+                     this list will most likely be enclosed in quotes or angle
+                     brackets
     """
     def __init__(self, text):
         """
