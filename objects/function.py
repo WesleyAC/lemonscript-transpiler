@@ -132,7 +132,7 @@ class Function(object):
         Returns the valid C++ constructors for the init and periodic functions.
         """
         prefix = "bool AutoFunction::"
-        arg_list = "(CitrusRobot* robot, std::vector<std::string> ls_arg_list)"
+        arg_list = "(CitrusRobot* robot, std::vector<void *> ls_arg_list)"
         init_constructor = (prefix + self.get_name() + "Init" + arg_list)
         periodic_constructor = (prefix + self.get_name() + "Periodic" + arg_list)
         return [init_constructor, periodic_constructor]
