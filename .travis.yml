@@ -8,4 +8,4 @@ python:
   - "3.5-dev"
   - "nightly"
 script:
-  - python tests/function.py
+  - py.test tests/function.py

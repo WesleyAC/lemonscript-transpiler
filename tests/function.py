@@ -10,7 +10,7 @@ def get_file_path(path):
     return os.path.dirname(os.path.realpath(__file__)) + "/" + path
 
 
-class TestFunctionMethods(unittest.TestCase):
+class TestFunctionMethods:
 
     def test_get_section(self):
         test_file = open(get_file_path("files/get_section.func"))
@@ -25,7 +25,7 @@ class TestFunctionMethods(unittest.TestCase):
         function = Function(test_text)
 
         for test in test_results:
-            self.assertEqual(function._get_section(test), test_results[test])
+            assert function._get_section(test) == test_results[test]
 
     def test_get_includes(self):
         test_file = open(get_file_path("files/get_includes.func"))
@@ -40,7 +40,7 @@ class TestFunctionMethods(unittest.TestCase):
         ]
         function = Function(test_text)
 
-        self.assertEqual(function._get_includes(), test_results)
+        assert function._get_includes() == test_results
 
     def test_get_name(self):
         test_file = open(get_file_path("files/get_name.func"))
@@ -51,11 +51,4 @@ class TestFunctionMethods(unittest.TestCase):
         for line in test_text.split("\n"):
             if line != "":
                 function = Function(line)
-                self.assertEqual(function._get_name(), test_results)
-
-
-if __name__ == "__main__":
-    unittest.main()
-
-
-
+                assert function._get_name() == test_results
