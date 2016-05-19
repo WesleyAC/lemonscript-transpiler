@@ -27,14 +27,8 @@ class Function(object):
         variables by parsing self.text.
         """
         self.text = text
-        self.name = self._get_name()
-        self.constructors = self._get_constructors()
-        self.args = self._get_args()
-        self.init_code = self._get_section_code("init")
-        self.periodic_code = self._get_section_code("periodic")
-        self.includes = self._get_includes()
 
-    def _get_section(self, section_name):
+    def get_section(self, section_name):
         """
         Gets a "section" in self.text. Example of a section:
 
@@ -61,12 +55,12 @@ class Function(object):
                 return '\n'.join(text_in_section)
         return '' #TODO(Wesley) Better way of indicating failure
 
-    def _get_section_code(self, section):
+    def get_section_code(self, section):
         """
         Gets the transpiled C++ code inside a section, including auto-generated
         variable casting code.
         """
-        raw_code = self._get_section(section)
+        raw_code = self.get_section(section)
         var_init_lines = []
 
         cast_functions = {
@@ -87,8 +81,8 @@ class Function(object):
 
         argnum = 0
 
-        if len(self.args) > 0:
-            for arg in self.args:
+        if len(self.get_args()) > 0:
+            for arg in self.get_args():
                 var_cast_func = cast_functions[arg[0]].format("ls_arg_list[{}]".format(argnum))
                 var_init_line = "  {arg[0]} {arg[1]} = {cast};".format(arg=arg, cast=var_cast_func)
                 var_init_lines.append(var_init_line)
@@ -99,13 +93,13 @@ class Function(object):
                 "\n  // END AUTO GENERATED CODE\n\n" +
                 raw_code)
 
-    def _get_includes(self):
+    def get_includes(self):
         """
         Returns a list of all of the lines in the "include" section of self.text,
         stripping trailing commas if needed.
         """
         includes = []
-        for line in self._get_section("include").split("\n"):
+        for line in self.get_section("include").split("\n"):
             if line:
                 include_text = line.strip()
                 if include_text[-1] == ",":
@@ -113,13 +107,13 @@ class Function(object):
                 includes += [include_text]
         return includes
 
-    def _get_args(self):
+    def get_args(self):
         """
         Returns a list of arguments. For an example of the format, see the
         class docstring.
         """
         try:
-            arg_string = self._get_raw_constructor().split("(")[1].split(")")[0]
+            arg_string = self.get_raw_constructor().split("(")[1].split(")")[0]
         except IndexError:
             arg_string = ""
         args = []
@@ -130,25 +124,25 @@ class Function(object):
                 args.append(arg_pair)
         return args
 
-    def _get_raw_constructor(self):
+    def get_raw_constructor(self):
         """
         Returns the first line of self.text, which we assume to be the
         lemonscript-style constructor. This is not valid C++ code.
         """
         return self.text.split("\n")[0]
 
-    def _get_constructors(self):
+    def get_constructors(self):
         """
         Returns the valid C++ constructors for the init and periodic functions.
         """
         prefix = "bool AutoFunction::"
         arg_list = "(CitrusRobot* robot, std::vector<std::string> ls_arg_list)"
-        init_constructor = (prefix + self._get_name() + "Init" + arg_list)
-        periodic_constructor = (prefix + self._get_name() + "Periodic" + arg_list)
+        init_constructor = (prefix + self.get_name() + "Init" + arg_list)
+        periodic_constructor = (prefix + self.get_name() + "Periodic" + arg_list)
         return [init_constructor, periodic_constructor]
 
-    def _get_name(self):
+    def get_name(self):
         """
         Returns the name of the function, as it will be used in lemonscript.
         """
-        return self._get_raw_constructor().split("(")[0].strip()
+        return self.get_raw_constructor().split("(")[0].strip()

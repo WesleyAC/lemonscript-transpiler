@@ -23,10 +23,10 @@ def generate_auto_functions_h(auto_function_objects):
     includes = []
 
     for auto_function in auto_function_objects:
-        for constructor in auto_function.constructors:
+        for constructor in auto_function.get_constructors():
             replacement = ["insert_text", "functions", constructor + ";"]
             replacements.append(replacement)
-        includes += auto_function.includes
+        includes += auto_function.get_includes()
 
     includes = list(set(includes)) # remove duplicates
     includes = ["#include " + name for name in includes]
@@ -38,13 +38,13 @@ def generate_auto_functions_cpp(auto_function_objects):
     replacements = [["replace_file", "warning", get_script_dir() + "text_includes/warning.inc"]]
 
     for auto_function in auto_function_objects:
-        cpp_init_code = auto_function.constructors[0] + " {\n" + \
-                        auto_function.init_code + "\n" + \
+        cpp_init_code = auto_function.get_constructors()[0] + " {\n" + \
+                        auto_function.get_section_code("init") + "\n" + \
                         "}\n"
         init_code_replacement = ["insert_text", "functions", cpp_init_code]
 
-        cpp_periodic_code = auto_function.constructors[1] + " {\n" + \
-                            auto_function.periodic_code + "\n" + \
+        cpp_periodic_code = auto_function.get_constructors()[1] + " {\n" + \
+                            auto_function.get_section_code("periodic") + "\n" + \
                             "}\n"
         periodic_code_replacement = ["insert_text", "functions", cpp_periodic_code]
 

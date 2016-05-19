@@ -25,7 +25,7 @@ class TestFunctionMethods:
         function = Function(test_text)
 
         for test in test_results:
-            assert function._get_section(test) == test_results[test]
+            assert function.get_section(test) == test_results[test]
 
     def test_get_includes(self):
         test_file = open(get_file_path("files/get_includes.func"))
@@ -40,7 +40,7 @@ class TestFunctionMethods:
         ]
         function = Function(test_text)
 
-        assert function._get_includes() == test_results
+        assert function.get_includes() == test_results
 
     def test_get_name(self):
         test_file = open(get_file_path("files/get_name.func"))
@@ -51,4 +51,4 @@ class TestFunctionMethods:
         for line in test_text.split("\n"):
             if line != "":
                 function = Function(line)
-                assert function._get_name() == test_results
+                assert function.get_name() == test_results
