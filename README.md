@@ -51,5 +51,5 @@ Lemonscript treats all arguments as strings, and internally converts them to the
 
 `transpile.py` has two flags:
 
-`--input-dir` - A directory with all the `.func` files in it. Defaults to `auto_functions`.
-`--output-dir` - A directory to put the transpiled .cpp and .h files in. Defaults to the directory that the script was run from.
+* `--input-dir` - A directory with all the `.func` files in it. Defaults to `auto_functions`.
+* `--output-dir` - A directory to put the transpiled .cpp and .h files in. Defaults to the directory that the script was run from.
