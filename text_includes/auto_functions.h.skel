@@ -1,0 +1,15 @@
+// vim: set filetype=cpp:
+<<<warning>>>
+
+<<<ls_convert>>>
+
+#ifndef AUTO_FUNCTIONS_H_
+#define AUTO_FUNCTIONS_H_
+
+//<<<includes>>>
+
+namespace AutoFunction {
+//<<<functions>>>
+}
+
+#endif
