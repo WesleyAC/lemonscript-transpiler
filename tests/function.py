@@ -20,7 +20,8 @@ class TestFunctionMethods:
             "test1": "  test1",
             "test2": "  test2",
             "test3": "  test3\n  test3",
-            "test4": "  test4"
+            "test4": "  test4",
+            "test6": ""
         }
         function = Function(test_text)
 
@@ -43,7 +44,7 @@ class TestFunctionMethods:
         assert function.get_includes() == test_results
 
     def test_get_name(self):
-        test_file = open(get_file_path("files/get_name.func"))
+        test_file = open(get_file_path("files/get_name_args.func"))
         test_text = test_file.read()
         test_file.close()
         test_results = "Name"
@@ -52,3 +53,24 @@ class TestFunctionMethods:
             if line != "":
                 function = Function(line)
                 assert function.get_name() == test_results
+
+    def test_get_args(self):
+        test_file = open(get_file_path("files/get_name_args.func"))
+        test_text = test_file.read()
+        test_file.close()
+        test_results = [
+            [],
+            [["int", "i"]],
+            [],
+            [["int", "i"], ["Time", "t"]],
+            [],
+            [["int", "i"], ["Time", "t"]]
+        ]
+
+        n = 0
+        for line in test_text.split("\n"):
+            if line != "":
+                function = Function(line)
+                assert function.get_args() == test_results[n]
+                n += 1
+
