@@ -1,4 +1,4 @@
-#lemonscript-transpiler
+#lemonscript-transpiler ![Build Status](https://travis-ci.org/WesleyAC/lemonscript-transpiler.svg)
 
 This is a script that converts .func files into a .h and .cpp file to be used with lemonscript.
 
