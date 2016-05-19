@@ -69,7 +69,7 @@ class Function(object):
         raw_code = self._get_section(section)
         var_init_lines = []
 
-        cast_functions = { #TODO(Wesley) Document supported units
+        cast_functions = {
             "int":                 "ConvertArgs::ls_convert_int({})",
             "bool":                "ConvertArgs::ls_convert_bool({})",
             "float":               "ConvertArgs::ls_convert_float({})",
@@ -135,7 +135,7 @@ class Function(object):
         Returns the first line of self.text, which we assume to be the
         lemonscript-style constructor. This is not valid C++ code.
         """
-        return self.text.split("\n")[0] #TODO(Wesley) Document this assumption
+        return self.text.split("\n")[0]
 
     def _get_constructors(self):
         """
