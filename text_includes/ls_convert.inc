@@ -2,34 +2,34 @@
 
 //TODO(Wesley) Don't do this every tick
 namespace ConvertArgs {
-int ls_convert_int(std::string arg) {
-  return std::stoi(arg);
+int ls_convert_int(void *arg) {
+  return *((int *)arg);
 }
-bool ls_convert_bool(std::string arg) {
-  return arg == "true" ? true : false;
+bool ls_convert_bool(void *arg) {
+  return *((bool *)arg);
 }
-float ls_convert_float(std::string arg) {
-  return std::stof(arg)
+float ls_convert_float(void *arg) {
+  return *((float *)arg);
 }
-Time ls_convert_time(std::string arg) {
-  return std::stof(arg) * s;
+Time ls_convert_time(void *arg) {
+  return ls_convert_float(arg) * s;
 }
-Distance ls_convert_distance(std::string arg) {
-  return std::stof(arg) * m;
+Distance ls_convert_distance(void *arg) {
+  return ls_convert_float(arg) * m;
 }
-Angle ls_convert_angle(std::string arg) {
-  return std::stof(arg) * rad;
+Angle ls_convert_angle(void *arg) {
+  return ls_convert_float(arg) * rad;
 }
-Velocity ls_convert_velocity(std::string arg) {
-  return std::stof(arg) * (m / s);
+Velocity ls_convert_velocity(void *arg) {
+  return ls_convert_float(arg) * (m / s);
 }
-Acceleration ls_convert_acceleration(std::string arg) {
-  return std::stof(arg) * (m / (s * s));
+Acceleration ls_convert_acceleration(void *arg) {
+  return ls_convert_float(arg) * (m / (s * s));
 }
-AngularVelocity ls_convert_angularvelocity(std::string arg) {
-  return std::stof(arg) * (rad / s);
+AngularVelocity ls_convert_angularvelocity(void *arg) {
+  return ls_convert_float(arg) * (rad / s);
 }
-Voltage ls_convert_voltage(std::string arg) {
-  return std::stof(arg) * V;
+Voltage ls_convert_voltage(void *arg) {
+  return ls_convert_float(arg) * V;
 }
 }
