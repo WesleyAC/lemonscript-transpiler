@@ -94,8 +94,9 @@ class File(object):
         text is the string that will be inserted
         """
         replace_text = "<<<{}>>>".format(key)
-        insert_at = self.text.find(replace_text) + len(replace_text) + 1 # Next line
-        self.text = self.text[:insert_at] + text + "\n" + self.text[insert_at:]
+        if self.text.find(replace_text) != -1:
+            insert_at = self.text.find(replace_text) + len(replace_text) + 1 # Next line
+            self.text = self.text[:insert_at] + text + "\n" + self.text[insert_at:]
 
     def insert_file(self, key, file_name):
         """
