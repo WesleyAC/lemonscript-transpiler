@@ -23,7 +23,7 @@ class TestFunctionMethods:
             "test4": "  test4",
             "test6": ""
         }
-        function = Function(test_text)
+        function = Function(test_text, "./")
 
         for test in test_results:
             assert function.get_section(test) == test_results[test]
@@ -39,7 +39,7 @@ class TestFunctionMethods:
             "test4",
             "test5"
         ]
-        function = Function(test_text)
+        function = Function(test_text, "./")
 
         assert function.get_includes() == test_results
 
@@ -51,7 +51,7 @@ class TestFunctionMethods:
 
         for line in test_text.split("\n"):
             if line != "":
-                function = Function(line)
+                function = Function(line, "./")
                 assert function.get_name() == test_results
 
     def test_get_args(self):
@@ -70,7 +70,7 @@ class TestFunctionMethods:
         n = 0
         for line in test_text.split("\n"):
             if line != "":
-                function = Function(line)
+                function = Function(line, "./")
                 assert function.get_args() == test_results[n]
                 n += 1
 

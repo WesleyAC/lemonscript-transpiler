@@ -1,0 +1,12 @@
+// vim: filetype=cpp:
+<<<warning>>>
+
+namespace AutoClass {
+  //<<<classes>>>
+}
+
+namespace AutoGenerator {
+  auto_functions = {
+    //<<<generators>>>
+  }
+}

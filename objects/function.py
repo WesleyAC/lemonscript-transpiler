@@ -1,3 +1,5 @@
+from objects.file import File
+
 class Function(object):
     """
     Represents a .func file
@@ -15,7 +17,7 @@ class Function(object):
                      this list will most likely be enclosed in quotes or angle
                      brackets
     """
-    def __init__(self, text):
+    def __init__(self, text, script_dir):
         """
         Parses a string from a .func file into a easy to use format
 
@@ -23,6 +25,7 @@ class Function(object):
         variables by parsing self.text.
         """
         self.text = text
+        self.script_dir = script_dir + ("/" if script_dir[-1] != "/" else "")
 
     def get_section(self, section_name):
         """
@@ -50,6 +53,24 @@ class Function(object):
             elif found_section:
                 return '\n'.join(text_in_section)
         return '' #TODO(Wesley) Better way of indicating failure
+
+    def get_class(self):
+        class_h_skel_file = open(self.script_dir + "text_includes/auto_function_class.h.skel")
+        class_h_file = File(class_h_skel_file.read())
+
+        class_h_file.replace_text("name", self.get_name())
+
+        for arg in self.get_args():
+            class_h_file.insert_text("vars", "{0} {1} = 0;".format(arg[0], arg[1]))
+
+        class_cpp_skel_file = open(self.script_dir + "text_includes/auto_function_class.cpp.skel")
+        class_cpp_file = File(class_cpp_skel_file.read())
+
+        class_cpp_file.replace_text("name", self.get_name())
+        class_cpp_file.replace_text("init_code", self.get_section_code("init"))
+        class_cpp_file.replace_text("periodic_code", self.get_section_code("periodic"))
+
+        return [class_h_file.text, class_cpp_file.text]
 
     def get_section_code(self, section):
         """

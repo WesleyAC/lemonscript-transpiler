@@ -12,46 +12,28 @@ def enumerate_auto_files(path):
     auto_function_files = []
 
     for function_file in glob.glob(os.path.join(path, "*.func")):
-        auto_function_files.append(Function(open(function_file).read()))
+        auto_function_files.append(Function(open(function_file).read(), get_script_dir()))
     return auto_function_files
 
-def generate_auto_functions_h(auto_function_objects):
+def generate_auto_functions(auto_function_objects):
     replacements = [
-        ["replace_file", "warning", get_script_dir() + "text_includes/warning.inc"],
-        ["replace_file", "ls_convert", get_script_dir() + "text_includes/ls_convert.inc"],
+        ["replace_file", "warning", get_script_dir() + "text_includes/warning.inc"]
     ]
     includes = []
 
+    auto_classes_h_file = File(open(get_script_dir() + "text_includes/auto_classes.h.skel").read(), replacements)
+    auto_classes_cpp_file = File(open(get_script_dir() + "text_includes/auto_classes.cpp.skel").read(), replacements)
+
     for auto_function in auto_function_objects:
-        for constructor in auto_function.get_constructors():
-            replacement = ["insert_text", "functions", constructor + ";"]
-            replacements.append(replacement)
         includes += auto_function.get_includes()
+        auto_classes_h_file.insert_text("classes", auto_function.get_class()[0])
+        auto_classes_cpp_file.insert_text("classes", auto_function.get_class()[1])
 
     includes = list(set(includes)) # remove duplicates
     includes = ["#include " + name for name in includes]
-    replacements.append(["insert_text", "includes", "\n".join(includes)])
+    auto_classes_h_file.insert_text("include", "\n".join(includes))
 
-    return File(open(get_script_dir() + "text_includes/auto_functions.h.skel").read(), replacements).text
-
-def generate_auto_functions_cpp(auto_function_objects):
-    replacements = [["replace_file", "warning", get_script_dir() + "text_includes/warning.inc"]]
-
-    for auto_function in auto_function_objects:
-        cpp_init_code = auto_function.get_constructors()[0] + " {\n" + \
-                        auto_function.get_section_code("init") + "\n" + \
-                        "}\n"
-        init_code_replacement = ["insert_text", "functions", cpp_init_code]
-
-        cpp_periodic_code = auto_function.get_constructors()[1] + " {\n" + \
-                            auto_function.get_section_code("periodic") + "\n" + \
-                            "}\n"
-        periodic_code_replacement = ["insert_text", "functions", cpp_periodic_code]
-
-        replacements.append(init_code_replacement)
-        replacements.append(periodic_code_replacement)
-
-    return File(open(get_script_dir() + "text_includes/auto_functions.cpp.skel").read(), replacements).text
+    return [auto_classes_h_file.text, auto_classes_cpp_file.text]
 
 def get_script_dir():
     return os.path.dirname(os.path.realpath(__file__)) + "/"
@@ -75,8 +57,10 @@ def main():
     cpp_file = open(output_path + "auto_functions.cpp", "w")
     h_file = open(output_path + "auto_functions.h", "w")
 
-    cpp_file.write(generate_auto_functions_cpp(auto_functions))
-    h_file.write(generate_auto_functions_h(auto_functions))
+    compiled_auto_functions = generate_auto_functions(auto_functions)
+
+    h_file.write(compiled_auto_functions[0])
+    cpp_file.write(compiled_auto_functions[1])
     cpp_file.close()
     h_file.close()
 

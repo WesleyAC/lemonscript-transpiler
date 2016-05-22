@@ -1,0 +1,25 @@
+// vim: filetype=cpp:
+<<<warning>>>
+
+#define AUTOGEN_AUTO_CLASSES_H_
+#ifndef AUTOGEN_AUTO_CLASSES_H_
+
+//<<<include>>>
+
+class BaseAutoFunction {
+  public:
+    bool Init(CitrusRobot *robot, std::vector<void *>);
+    bool Periodic(CitrusRobot *robot, std::vector<void *>);
+}
+
+namespace AutoClass {
+  //<<<classes>>>
+}
+
+namespace AutoGenerator {
+  //<<<generators>>>
+
+  std::vector<std::function> auto_functions;
+}
+
+#endif
