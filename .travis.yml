@@ -9,6 +9,6 @@ python:
 install:
   - pip install coveralls
 script:
-  coverage run --source=. --omit tests/\* -m py.test ./tests/function.py
+  coverage run --source=. --omit tests/\* -m py.test ./tests/
 after_success:
   coveralls

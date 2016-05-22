@@ -13,7 +13,7 @@ def get_file_path(path):
 class TestFunctionMethods:
 
     def test_get_section(self):
-        test_file = open(get_file_path("files/get_section.func"))
+        test_file = open(get_file_path("files/function/get_section.func"))
         test_text = test_file.read()
         test_file.close()
         test_results = {
@@ -29,7 +29,7 @@ class TestFunctionMethods:
             assert function.get_section(test) == test_results[test]
 
     def test_get_includes(self):
-        test_file = open(get_file_path("files/get_includes.func"))
+        test_file = open(get_file_path("files/function/get_includes.func"))
         test_text = test_file.read()
         test_file.close()
         test_results = [
@@ -44,7 +44,7 @@ class TestFunctionMethods:
         assert function.get_includes() == test_results
 
     def test_get_name(self):
-        test_file = open(get_file_path("files/get_name_args.func"))
+        test_file = open(get_file_path("files/function/get_name_args.func"))
         test_text = test_file.read()
         test_file.close()
         test_results = "Name"
@@ -55,7 +55,7 @@ class TestFunctionMethods:
                 assert function.get_name() == test_results
 
     def test_get_args(self):
-        test_file = open(get_file_path("files/get_name_args.func"))
+        test_file = open(get_file_path("files/function/get_name_args.func"))
         test_text = test_file.read()
         test_file.close()
         test_results = [
