@@ -32,7 +32,7 @@ A few things to keep in mind:
 
 ##Supported units
 
-Lemonscript treats all arguments as strings, and internally converts them to the correct units. Because of this, only the following types are supported as arguments to auto functions:
+Lemonscript treats all arguments as void pointers, and internally converts them to the correct units. Because of this, only the following types are supported as arguments to auto functions:
 
 * `int`
 * `bool`
