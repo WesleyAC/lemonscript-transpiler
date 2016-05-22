@@ -45,3 +45,14 @@ class TestFileMethods:
         result = open(get_file_path("files/file/insert_result.skel")).read()
 
         assert file_object.text == result
+
+    def test_insert_file(self):
+        test_file = open(get_file_path("files/file/insert.skel"))
+        test_text = test_file.read()
+
+        file_object = File(test_text)
+        file_object.insert_file("insert", get_file_path("files/file/insert.inc"))
+
+        result = open(get_file_path("files/file/insert_file_result.skel")).read()
+
+        assert file_object.text == result
