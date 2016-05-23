@@ -60,8 +60,8 @@ class Function(object):
 
         class_h_file.replace_text("name", self.get_name())
 
-        for arg in self.get_args():
-            class_h_file.insert_text("vars", "{0} {1} = 0;".format(arg[0], arg[1]))
+        for var in self.get_section("global").split("\n"):
+            class_h_file.insert_text("vars", var + " = 0;")
 
         class_cpp_skel_file = open(self.script_dir + "text_includes/auto_function_class.cpp.skel")
         class_cpp_file = File(class_cpp_skel_file.read())
