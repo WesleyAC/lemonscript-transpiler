@@ -9,7 +9,7 @@ class TestTranspiler:
         try:
             os.remove("/tmp/auto_functions.cpp")
             os.remove("/tmp/auto_functions.h")
-        except FileNotFoundError:
+        except OSError:
             pass
 
         transpiler.main(["--output-dir", "/tmp"])
@@ -21,7 +21,7 @@ class TestTranspiler:
         try:
             os.remove("/tmp/auto_functions.cpp")
             os.remove("/tmp/auto_functions.h")
-        except FileNotFoundError:
+        except OSError:
             pass
 
         transpiler.main(["--format", "--output-dir", "/tmp"])
