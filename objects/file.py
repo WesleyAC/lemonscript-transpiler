@@ -1,3 +1,5 @@
+import re
+
 class File(object):
     """
     This class represents a file that can have parts of it replaced with text
@@ -18,7 +20,7 @@ class File(object):
     Calling replace_text("animal", "octocat") will cause the string
     "<<<animal>>>" to be replaced with the string "octocat"
     """
-    def __init__(self, text, replacements=None):
+    def __init__(self, text, replacements=None, remove_modelines=5):
         """
         Creates a File object from a string representing the contents of a file,
         and, optionally, a list of replacements to be done on the file.
@@ -29,6 +31,8 @@ class File(object):
         self.text = self.init_text
         if replacements is not None:
             self.replace(replacements)
+        if remove_modelines > 0:
+            self.remove_modelines(remove_modelines)
 
     def replace(self, replacements):
         """
@@ -116,3 +120,15 @@ class File(object):
         file_name is the name of the file that it will be replaced with
         """
         self.insert_text(key, open(file_name).read())
+
+    def remove_modelines(self, n=5):
+        line_num = 1
+        output_lines = []
+        modeline_regex = re.compile(r"(\A|$)((//)|#)\s*vim\s*:[^:]+:")
+        for line in self.text.split("\n"):
+            if not (modeline_regex.match(line) and line_num <= n):
+                output_lines.append(line)
+            line_num += 1
+
+        self.text = "\n".join(output_lines)
+

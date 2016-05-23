@@ -56,3 +56,37 @@ class TestFileMethods:
         result = open(get_file_path("files/file/insert_file_result.skel")).read()
 
         assert file_object.text == result
+
+    def test_remove_modelines(self):
+        test_file = open(get_file_path("files/file/modelines.skel"))
+        test_text = test_file.read()
+
+        result = "\n".join(test_text.split("\n")[5:])
+
+        file_object = File(test_text, remove_modelines=0)
+
+        file_object.remove_modelines()
+
+        assert file_object.text == result
+
+    def test_remove_modelines_custom_number(self):
+        test_file = open(get_file_path("files/file/modelines.skel"))
+        test_text = test_file.read()
+
+        result = ""
+
+        file_object = File(test_text, remove_modelines=0)
+
+        file_object.remove_modelines(n=10)
+
+        assert file_object.text == result
+
+    def test_remove_modelines_by_default(self):
+        test_file = open(get_file_path("files/file/modelines.skel"))
+        test_text = test_file.read()
+
+        result = "\n".join(test_text.split("\n")[5:])
+
+        file_object = File(test_text)
+
+        assert file_object.text == result
