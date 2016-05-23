@@ -2,3 +2,9 @@
 branch = True
 source = .
 omit = tests/*
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if 0:
+    if __name__ == .__main__.:
