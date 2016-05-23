@@ -18,7 +18,7 @@ global {
 }
 
 init {
-  Time start_time = muan::now();
+  start_time = muan::now();
   return false;
 }
 
