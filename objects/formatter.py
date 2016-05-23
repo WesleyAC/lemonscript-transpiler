@@ -17,7 +17,7 @@ class Formatter(object):
         try:
             clang_process = subprocess.Popen([clang_path, "-style=" + self.style], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
             return clang_process.communicate(input=bytes(self.text.encode("utf-8")))[0].decode("utf-8")
-        except subprocess.CalledProcessError:
+        except OSError:
             return self.text #TODO(Wesley) warn user
 
 

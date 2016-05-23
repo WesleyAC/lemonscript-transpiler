@@ -7,6 +7,9 @@ parent_dir = os.path.dirname(os.path.realpath(__file__)) + "/../"
 sys.path.append(parent_dir) # a bit of a hack, but it makes the import the same
 from objects.formatter import Formatter
 
+def get_file_path(path):
+    return os.path.dirname(os.path.realpath(__file__)) + "/" + path
+
 class TestFormatterMethods():
 
     def test_get_clang_path_exists(self):
@@ -40,3 +43,20 @@ class TestFormatterMethods():
         os.mkdir("/tmp/test_root/usr/bin/")
 
         assert formatter.get_clang_path("/tmp/test_root") == None
+
+    def test_get_formatted_text(self):
+        formatter = Formatter("test")
+
+        assert "test_passed" in formatter.get_formatted_text(get_file_path("files/formatter/mock_clang_format.py"))
+        assert "-style=" in formatter.get_formatted_text(get_file_path("files/formatter/mock_clang_format.py"))
+
+    def test_get_formatted_text_clang_format_failure(self):
+        formatter_input = "test_fail"
+        formatter = Formatter(formatter_input)
+
+        assert formatter.get_formatted_text(get_file_path("files/formatter/mock_clang_format_fail.sh")) == formatter_input
+
+    def test_get_formatted_text_style(self):
+        formatter = Formatter("test", style="test_style_passed")
+
+        assert "-style=test_style_passed" in formatter.get_formatted_text(get_file_path("files/formatter/mock_clang_format.py"))
