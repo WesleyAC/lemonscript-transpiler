@@ -37,7 +37,7 @@ Lemonscript treats all arguments as void pointers, and internally converts them 
 * `int`
 * `bool`
 * `float`
-* `string`
+* `std::string`
 * `Time`
 * `Distance`
 * `Length`

@@ -11,6 +11,9 @@ bool ls_convert_bool(void *arg) {
 float ls_convert_float(void *arg) {
   return *((float *)arg);
 }
+std::string ls_convert_string(void *arg) {
+  return *((std::string *)arg);
+}
 Time ls_convert_time(void *arg) {
   return ls_convert_float(arg) * s;
 }
