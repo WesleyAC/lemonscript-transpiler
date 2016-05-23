@@ -23,7 +23,7 @@ init {
 }
 
 periodic {
-  return (muan::now() - start_time < start_time);
+  return (muan::now() - start_time > time);
 }
 ```
 
