@@ -43,21 +43,15 @@ def get_script_dir():
 
 def parse_args(args=None):
     parser = argparse.ArgumentParser(description="Convert Lemonscript .func files to C++ code")
-    parser.add_argument("--output-dir", help="Set the directory to output the .cpp and .h files in")
+    parser.add_argument("--output-dir", default="./", help="Set the directory to output the .cpp and .h files in")
     parser.add_argument("--input-dir", default="auto_functions", help="Set the directory to read the .func files from")
     parser.add_argument('--format', action='store_true', help="Run clang-format on outputted code")
-    if args != None:
-        return parser.parse_args(args)
-    else:
-        return parser.parse_args()
+    return parser.parse_args(args)
 
 def main(arg_list=None):
     args = vars(parse_args(arg_list))
     auto_functions = enumerate_auto_files(args["input_dir"])
-    if args["output_dir"] is None:
-        output_path = "./"
-    else:
-        output_path = args["output_dir"]
+    output_path = args["output_dir"]
     if output_path[-1] != "/":
         output_path += "/"
 
