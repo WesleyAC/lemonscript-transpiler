@@ -5,6 +5,7 @@ import argparse
 
 from objects.function import Function
 from objects.file import File
+from objects.formatter import Formatter
 
 def enumerate_auto_files(path):
     if not path[-1] == "/":
@@ -44,6 +45,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Convert Lemonscript .func files to C++ code")
     parser.add_argument("--output-dir", help="Set the directory to output the .cpp and .h files in")
     parser.add_argument("--input-dir", default="auto_functions", help="Set the directory to read the .func files from")
+    parser.add_argument('--format', action='store_true', help="Run clang-format on outputted code")
     return parser.parse_args()
 
 def main():
@@ -60,6 +62,9 @@ def main():
     h_file = open(output_path + "auto_functions.h", "w")
 
     compiled_auto_functions = generate_auto_functions(auto_functions)
+
+    if args["format"]:
+        compiled_auto_functions = [Formatter(func).get_formatted_text() for func in compiled_auto_functions]
 
     h_file.write(compiled_auto_functions[0])
     cpp_file.write(compiled_auto_functions[1])

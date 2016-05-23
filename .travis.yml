@@ -1,4 +1,6 @@
 language: python
+sudo: required
+dist: trusty
 python:
   - "2.7"
   - "3.3"
@@ -6,9 +8,12 @@ python:
   - "3.5"
   - "3.5-dev"
   - "nightly"
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install clang-format-3.5
 install:
   - pip install coveralls
 script:
-  coverage run --source=. --omit tests/\* -m py.test ./tests/
+  - coverage run --source=. --omit tests/\* -m py.test ./tests/
 after_success:
-  coveralls
+  - coveralls
