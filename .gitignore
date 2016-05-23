@@ -4,5 +4,6 @@
 *.sw*
 .coverage
 auto_functions
+!tests/files/transpiler/auto_functions
 auto_functions.cpp
 auto_functions.h
