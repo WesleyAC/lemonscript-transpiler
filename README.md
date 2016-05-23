@@ -1,4 +1,4 @@
-#lemonscript-transpiler [![Build Status](https://travis-ci.org/WesleyAC/lemonscript-transpiler.svg)](https://travis-ci.org/WesleyAC/lemonscript-transpiler) [![Coverage Status](https://coveralls.io/repos/github/WesleyAC/lemonscript-transpiler/badge.svg?branch=master)](https://coveralls.io/github/WesleyAC/lemonscript-transpiler?branch=master)
+#lemonscript-transpiler [![Build Status](https://travis-ci.org/WesleyAC/lemonscript-transpiler.svg)](https://travis-ci.org/WesleyAC/lemonscript-transpiler) [![Coverage Status](https://coveralls.io/repos/github/WesleyAC/lemonscript-transpiler/badge.svg?branch=master)](https://coveralls.io/github/WesleyAC/lemonscript-transpiler?branch=master)![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 This is a script that converts .func files into a .h and .cpp file to be used with lemonscript.
 
