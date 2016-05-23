@@ -13,8 +13,12 @@ include {
   "muan/utils/timing_utils.h"
 }
 
+global {
+  Time start_time
+}
+
 init {
-  Time start_time = lemon_var("start_time", muan::now());
+  Time start_time = muan::now();
   return false;
 }
 
