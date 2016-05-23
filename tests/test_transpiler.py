@@ -63,3 +63,13 @@ class TestTranspiler:
         transpiler.main(["--format", "--input-dir", "tests/files/transpiler/auto_functions_compile"])
 
         subprocess.check_call(["g++", "-o", "/dev/null", "--std=c++11", "auto_functions.cpp"])
+
+    def test_run_transpiler_as_process(self):
+        self.clean_auto_funcs()
+
+        subprocess.check_call(["./transpiler.py", "--format", "--input-dir", "tests/files/transpiler/auto_functions", "--output-dir", "/tmp"])
+
+        assert os.path.isfile("/tmp/auto_functions.cpp")
+        assert os.path.isfile("/tmp/auto_functions.h")
+        assert "Wait" in open("/tmp/auto_functions.h").read()
+        assert "Wait" in open("/tmp/auto_functions.cpp").read()
