@@ -53,7 +53,10 @@ Lemonscript treats all arguments as void pointers, and internally converts them 
 
 ##Arguments
 
-`transpile.py` has two flags:
+`transpile.py` has the following flags:
 
-* `--input-dir` - A directory with all the `.func` files in it. Defaults to `auto_functions`.
-* `--output-dir` - A directory to put the transpiled .cpp and .h files in. Defaults to the directory that the script was run from.
+| flag           | function |
+| -------------- | -------- |
+| `--input-dir`  | A directory with all the `.func` files in it. Defaults to `auto_functions`. |
+| `--output-dir` | A directory to put the transpiled .cpp and .h files in. Defaults to the directory that the script was run from. |
+| `--format`     | Use `clang-format` to make the generated code pretty. |
