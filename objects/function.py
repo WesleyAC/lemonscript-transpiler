@@ -6,9 +6,6 @@ class Function(object):
 
     text - text passed into the constructor
     get_name() - the name of the function, as it will be used in the .auto file
-    get_constructors() - a list containing 2 strings that are inserted into C++
-                         source code as constructors for tne periodic and init
-                         functions.
     get_args() - A list of all args. Example:
                  [["Distance", "dist"], ["Angle", "angle"]]
     get_section_code() - the literal C++ code that should be in a section
@@ -157,16 +154,6 @@ class Function(object):
         lemonscript-style constructor. This is not valid C++ code.
         """
         return self.text.split("\n")[0]
-
-    def get_constructors(self):
-        """
-        Returns the valid C++ constructors for the init and periodic functions.
-        """
-        prefix = "bool AutoFunction::"
-        arg_list = "(CitrusRobot* robot, std::vector<void *> ls_arg_list)"
-        init_constructor = (prefix + self.get_name() + "Init" + arg_list)
-        periodic_constructor = (prefix + self.get_name() + "Periodic" + arg_list)
-        return [init_constructor, periodic_constructor]
 
     def get_name(self):
         """
