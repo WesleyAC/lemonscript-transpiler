@@ -21,7 +21,7 @@ class Formatter(object):
             return self.text #TODO(Wesley) warn user
 
 
-    def get_clang_path(self):
+    def get_clang_path(self, test_prefix=""):
         possible_paths = [
             "/usr/bin/clang-format",
             "/usr/bin/clang-format-3.7",
@@ -30,7 +30,7 @@ class Formatter(object):
         ]
 
         for path in possible_paths:
-            if os.path.isfile(path):
+            if os.path.isfile(test_prefix + path):
                 return path
 
         return None
