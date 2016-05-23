@@ -35,6 +35,7 @@ def generate_auto_functions(auto_function_objects):
     includes = list(set(includes)) # remove duplicates
     includes = ["#include " + name for name in includes]
     auto_classes_h_file.insert_text("include", "\n".join(includes))
+    auto_classes_h_file.replace_file("convert", get_script_dir() + "text_includes/ls_convert.inc")
 
     return [auto_classes_h_file.text, auto_classes_cpp_file.text]
 

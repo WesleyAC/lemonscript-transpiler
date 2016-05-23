@@ -1,11 +1,9 @@
 // vim: filetype=cpp:
 
-<<<name>>>::<<<name>>>() {}
-
-<<<name>>>::Init(CitrusRobot *robot, std:vector<void *> ls_arg_list) {
+bool <<<name>>>Class::Init(CitrusRobot *robot, std::vector<void *> ls_arg_list) {
   <<<init_code>>>
 }
 
-<<<name>>>::Periodic(CitrusRobot *robot, std::vector<void *> ls_arg_list) {
+bool <<<name>>>Class::Periodic(CitrusRobot *robot, std::vector<void *> ls_arg_list) {
   <<<periodic_code>>>
 }

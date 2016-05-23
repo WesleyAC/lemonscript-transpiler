@@ -1,16 +1,26 @@
 // vim: filetype=cpp:
 <<<warning>>>
 
-#define AUTOGEN_AUTO_CLASSES_H_
 #ifndef AUTOGEN_AUTO_CLASSES_H_
+#define AUTOGEN_AUTO_CLASSES_H_
+
+#include <vector>
+#include <functional>
+
 
 //<<<include>>>
+
+
+//<<<convert>>>
+
 
 class BaseAutoFunction {
   public:
     bool Init(CitrusRobot *robot, std::vector<void *>);
     bool Periodic(CitrusRobot *robot, std::vector<void *>);
-}
+  private:
+    //none
+};
 
 namespace AutoClass {
   //<<<classes>>>
@@ -19,7 +29,7 @@ namespace AutoClass {
 namespace AutoGenerator {
   //<<<generators>>>
 
-  std::vector<std::function> auto_functions;
+  std::vector<std::function<BaseAutoFunction(CitrusRobot*,std::vector<void *>)>> auto_functions;
 }
 
 #endif

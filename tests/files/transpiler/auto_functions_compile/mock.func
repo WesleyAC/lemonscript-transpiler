@@ -1,0 +1,19 @@
+Wait(Time time)
+
+include {
+  "tests/files/transpiler/mock_code.h"
+  "tests/files/transpiler/unitscpp.h"
+}
+
+global {
+  Time start_time
+}
+
+init {
+  start_time = 0;
+  return false;
+}
+
+periodic {
+  return 0 * s - time > start_time;
+}

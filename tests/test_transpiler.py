@@ -1,4 +1,5 @@
 import os
+import subprocess
 import unittest
 
 import transpiler
@@ -9,6 +10,8 @@ class TestTranspiler:
         try:
             os.remove("/tmp/auto_functions.cpp")
             os.remove("/tmp/auto_functions.h")
+            os.remove("auto_functions.cpp")
+            os.remove("auto_functions.h")
         except OSError:
             pass
 
@@ -53,3 +56,10 @@ class TestTranspiler:
         assert "Wait" in open("/tmp/auto_functions.cpp").read()
 
         os.chdir(old_dir)
+
+    def test_transpiler_code_compiles(self):
+        self.clean_auto_funcs()
+
+        transpiler.main(["--format", "--input-dir", "tests/files/transpiler/auto_functions_compile"])
+
+        subprocess.check_call(["g++", "-o", "/dev/null", "--std=c++11", "auto_functions.cpp"])

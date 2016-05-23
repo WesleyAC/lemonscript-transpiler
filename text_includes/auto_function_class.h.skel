@@ -1,10 +1,9 @@
 // vim: filetype=cpp:
 
-class <<<name>>> : public BaseAutoFunction {
+class <<<name>>>Class : public BaseAutoFunction {
   public:
-    <<<name>>>();
     bool Init(CitrusRobot *robot, std::vector<void *> ls_arg_list);
     bool Periodic(CitrusRobot *robot, std::vector<void *> ls_arg_list);
   private:
     //<<<vars>>>
-}
+};

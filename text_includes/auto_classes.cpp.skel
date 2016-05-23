@@ -1,6 +1,8 @@
 // vim: filetype=cpp:
 <<<warning>>>
 
+#include "auto_functions.h"
+
 namespace AutoClass {
   //<<<classes>>>
 }
