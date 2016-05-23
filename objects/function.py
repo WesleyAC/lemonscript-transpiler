@@ -125,10 +125,7 @@ class Function(object):
         includes = []
         for line in self.get_section("include").split("\n"):
             if line:
-                include_text = line.strip()
-                if include_text[-1] == ",":
-                    include_text = include_text[:-1]
-                includes += [include_text]
+                includes += [line.strip()]
         return includes
 
     def get_args(self):
