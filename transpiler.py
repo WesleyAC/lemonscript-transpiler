@@ -51,7 +51,7 @@ def parse_args(args=None):
     else:
         return parser.parse_args()
 
-def main(arg_list):
+def main(arg_list=None):
     args = vars(parse_args(arg_list))
     auto_functions = enumerate_auto_files(args["input_dir"])
     if args["output_dir"] is None:
