@@ -72,6 +72,17 @@ class Function(object):
 
         return [class_h_file.text, class_cpp_file.text]
 
+    def get_generator(self):
+        generator_h_skel_file = open(self.script_dir + "text_includes/auto_function_generator.h.skel").read()
+        generator_cpp_skel_file = open(self.script_dir + "text_includes/auto_function_generator.cpp.skel").read()
+
+        replacements = [["replace_text", "name", self.get_name()]]
+
+        generator_h_file = File(generator_h_skel_file, replacements)
+        generator_cpp_file = File(generator_cpp_skel_file, replacements)
+
+        return [generator_h_file.text, generator_cpp_file.text]
+
     def get_section_code(self, section):
         """
         Gets the transpiled C++ code inside a section, including auto-generated

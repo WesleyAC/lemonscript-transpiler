@@ -6,7 +6,5 @@ namespace AutoClass {
 }
 
 namespace AutoGenerator {
-  auto_functions = {
-    //<<<generators>>>
-  }
+  //<<<generators>>>
 }

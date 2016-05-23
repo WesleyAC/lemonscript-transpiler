@@ -1,0 +1,3 @@
+Base AutoFunction New<<<name>>>Command() {
+  return new AutoClass::<<<name>>>();
+}

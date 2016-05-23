@@ -28,6 +28,8 @@ def generate_auto_functions(auto_function_objects):
         includes += auto_function.get_includes()
         auto_classes_h_file.insert_text("classes", auto_function.get_class()[0])
         auto_classes_cpp_file.insert_text("classes", auto_function.get_class()[1])
+        auto_classes_h_file.insert_text("generators", auto_function.get_generator()[0])
+        auto_classes_cpp_file.insert_text("generators", auto_function.get_generator()[1])
 
     includes = list(set(includes)) # remove duplicates
     includes = ["#include " + name for name in includes]
