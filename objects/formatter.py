@@ -12,8 +12,8 @@ class Formatter(object):
     def get_formatted_text(self, clang_path=None):
         if clang_path == None:
             clang_path = self.get_clang_path()
-        if clang_path == None:
-            return self.text #TODO(Wesley) warn user. pramga: no cover
+        if clang_path == None: # pragma: no cover
+            return self.text #TODO(Wesley) warn user.
         try:
             clang_process = subprocess.Popen([clang_path, "-style=" + self.style], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
             return clang_process.communicate(input=bytes(self.text.encode("utf-8")))[0].decode("utf-8")
