@@ -30,7 +30,7 @@ periodic {
 A few things to keep in mind:
 
 * The first line of the file must have the name of the auto function, and all of it's arguments on it.
-* You cannot have indentation before `include`, `init`, or `periodic`.
+* You cannot have indentation before `include`, `global`, `init`, or `periodic`.
 * All files to include must be on a different line in the `include` block.
 * If you try to break the transpiler, you will be able to. It should handle any reasonable file, but don't try to break it.
 
