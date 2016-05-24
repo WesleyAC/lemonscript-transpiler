@@ -15,3 +15,8 @@ script:
   - coverage run -m py.test ./tests/
 after_success:
   - coveralls
+
+notifications:
+  slack:
+    rooms:
+      - 1678programming:1Jl3PcIc0ebMhrNikVcam4WU#lemonscript
