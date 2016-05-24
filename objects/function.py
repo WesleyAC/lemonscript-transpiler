@@ -1,4 +1,5 @@
 from objects.file import File
+from .logger import Logger
 
 class Function(object):
     """
@@ -49,6 +50,7 @@ class Function(object):
                 text_in_section.append(line)
             elif found_section:
                 return '\n'.join(text_in_section)
+        Logger.warn("Section {0} not found in {1}!".format(section_name, self.get_name()))
         return '' #TODO(Wesley) Better way of indicating failure
 
     def get_class(self):

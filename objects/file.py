@@ -1,4 +1,5 @@
 import re
+from .logger import Logger
 
 class File(object):
     """
@@ -68,6 +69,7 @@ class File(object):
         key is the tag to be replaced, without the enclosing angle brackets
         text is the string to replace it with
         """
+        Logger.debug("Replacing tag {0} with \"{1}\"...".format(key, text[:45].replace("\n", "\\n")))
         replace_text = "<<<{}>>>".format(key)
         self.text = self.text.replace(replace_text, text)
 
@@ -78,6 +80,7 @@ class File(object):
         key is the tag to be replaced, without the enclosing angle brackets
         file_name is name of the file that it will be replaced with
         """
+        Logger.debug("Replacing tag {0} with file {1}".format(key, file_name))
         self.replace_text(key, open(file_name).read())
 
     def insert_text(self, key, text):
@@ -97,6 +100,7 @@ class File(object):
         key is the tag to be replaced, without the enclosing angle brackets
         text is the string that will be inserted
         """
+        Logger.debug("Inserting \"{1}\"... at tag {0}".format(key, text[:45].replace("\n", "\\n")))
         replace_text = "<<<{}>>>".format(key)
         if self.text.find(replace_text) != -1:
             insert_at = self.text.find(replace_text) + len(replace_text) + 1 # Next line
@@ -119,9 +123,11 @@ class File(object):
         key is the tag to be replaced, without the enclosing angle brackets
         file_name is the name of the file that it will be replaced with
         """
+        Logger.debug("Inserting file {1} at tag {0}".format(key, file_name))
         self.insert_text(key, open(file_name).read())
 
     def remove_modelines(self, n=5):
+        Logger.debug("Removing modelines from file (Searching first {} lines)".format(n))
         line_num = 1
         output_lines = []
         modeline_regex = re.compile(r"(\A|$)((//)|#)\s*vim\s*:[^:]+:")

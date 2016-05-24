@@ -6,6 +6,7 @@ import argparse
 from objects.function import Function
 from objects.file import File
 from objects.formatter import Formatter
+from objects.logger import Logger
 
 def enumerate_auto_files(path):
     if not path[-1] == "/":
@@ -46,12 +47,18 @@ def parse_args(args=None):
     parser = argparse.ArgumentParser(description="Convert Lemonscript .func files to C++ code")
     parser.add_argument("--output-dir", default="./", help="Set the directory to output the .cpp and .h files in")
     parser.add_argument("--input-dir", default="auto_functions", help="Set the directory to read the .func files from")
-    parser.add_argument('--format', action='store_true', help="Run clang-format on outputted code")
+    parser.add_argument("--format", action="store_true", help="Run clang-format on outputted code")
+    parser.add_argument("--verbose", "-v", action="count", default=0, help="Show more debug info")
+    parser.add_argument("--quiet", "-q", action="count", default=0, help="Show less debug info")
     return parser.parse_args(args)
 
 def main(arg_list=None):
     args = vars(parse_args(arg_list))
+    Logger.show_log_levels += args["verbose"] - args["quiet"]
+    Logger.debug("Log level: {}".format(Logger.show_log_levels))
+    Logger.debug("Arguments: {}".format(args))
     auto_functions = enumerate_auto_files(args["input_dir"])
+    Logger.info("Found auto functions: {}".format([func.get_name() for func in auto_functions]))
     output_path = args["output_dir"]
     if output_path[-1] != "/":
         output_path += "/"
@@ -62,12 +69,15 @@ def main(arg_list=None):
     compiled_auto_functions = generate_auto_functions(auto_functions)
 
     if args["format"]:
+        Logger.info("Formatting output files")
         compiled_auto_functions = [Formatter(func).get_formatted_text() for func in compiled_auto_functions]
 
+    Logger.debug("Writing output files")
     h_file.write(compiled_auto_functions[0])
     cpp_file.write(compiled_auto_functions[1])
     cpp_file.close()
     h_file.close()
+    Logger.info("Done :)")
 
 if __name__ == "__main__":
     main()
