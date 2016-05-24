@@ -61,4 +61,4 @@ Lemonscript treats all arguments as void pointers, and internally converts them 
 | `--output-dir` | A directory to put the transpiled .cpp and .h files in. Defaults to the directory that the script was run from. |
 | `--format`     | Use `clang-format` to make the generated code pretty. |
 | `-v`           | Sets log level to be more verbose. You may use more than one, but the default is everything but debug, so that's pretty useless. |
-| `-q`           | Sets log level to be less verbose. You may use more than one. For example `-qq` will hide everythong except errors. `-qqq` **should** result in no output to stdout. |
+| `-q`           | Sets log level to be less verbose. You may use more than one. For example `-qq` will hide everything except errors. `-qqq` **should** result in no output to stdout. |
