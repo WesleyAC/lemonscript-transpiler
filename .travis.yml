@@ -33,7 +33,7 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then   brew install clang-format                ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then   sudo easy_install pip                    ; fi
 install:
-  - pip install coveralls
+  - sudo pip install coveralls
 script:
   - coverage run -m py.test ./tests/
 after_success:
