@@ -1,6 +1,5 @@
 import sys
 import os
-import unittest
 
 parent_dir = os.path.dirname(os.path.realpath(__file__)) + "/../"
 sys.path.append(parent_dir) # a bit of a hack, but it makes the import the same
