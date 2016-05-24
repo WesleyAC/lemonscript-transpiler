@@ -25,12 +25,12 @@ matrix:
       language: generic
 
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; sudo apt-get -qq update                  ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; sudo apt-get install -y clang-format-3.5 ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update                  ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y clang-format-3.5 ; fi
 
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]];   sudo brew install python3                ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]];   sudo brew install clang-format           ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]];   sudo easy_install pip                    ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then   sudo brew install python3                ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then   sudo brew install clang-format           ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then   sudo easy_install pip                    ; fi
 install:
   - pip install coveralls
 script:
