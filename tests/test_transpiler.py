@@ -72,3 +72,14 @@ class TestTranspiler:
         assert os.path.isfile("/tmp/auto_functions.h")
         assert "Wait" in open("/tmp/auto_functions.h").read()
         assert "Wait" in open("/tmp/auto_functions.cpp").read()
+
+    def test_transpiler_silent_flag(self):
+        self.clean_auto_funcs()
+
+        assert subprocess.check_output(["./transpiler.py", "-qq", "--output-dir", "/tmp"]).decode("utf-8") == ""
+
+    def test_enumerate_auto_files(self):
+        auto_files = transpiler.enumerate_auto_files("tests/files/transpiler/auto_functions")
+        assert len(auto_files) == 1
+        assert "Wait" in [auto_file.get_name() for auto_file in auto_files]
+
