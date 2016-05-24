@@ -33,7 +33,7 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then     brew install python3                                          ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then     brew install clang-format                                     ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then     export PYTHONPATH="$HOME/.local/lib/python2.7/site-packages"  ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then     mkdir $HOME/.local/lib/python2.7/site-packages                ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then     mkdir -p $HOME/.local/lib/python2.7/site-packages             ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then     easy_install --prefix=$HOME/.local pip                        ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then     pip install --user coveralls                                  ; fi
 script:
