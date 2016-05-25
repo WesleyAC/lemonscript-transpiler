@@ -76,7 +76,7 @@ class TestTranspiler:
     def test_transpiler_silent_flag(self):
         self.clean_auto_funcs()
 
-        assert subprocess.check_output(["./transpiler.py", "-qq", "--output-dir", "/tmp"]).decode("utf-8") == ""
+        assert subprocess.check_output(["./transpiler.py", "-qqq", "--output-dir", "/tmp"]).decode("utf-8") == ""
 
     def test_enumerate_auto_files(self):
         auto_files = transpiler.enumerate_auto_files("tests/files/transpiler/auto_functions")
