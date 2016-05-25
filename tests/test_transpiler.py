@@ -61,7 +61,7 @@ class TestTranspiler:
 
         transpiler.main(["--format", "--input-dir", "tests/files/transpiler/auto_functions_compile"])
 
-        subprocess.check_call(["g++", "-o", "/dev/null", "--std=c++11", "auto_functions.cpp"])
+        subprocess.check_call(["g++", "-o", "/dev/null", "--std=c++14", "auto_functions.cpp"])
 
     def test_run_transpiler_as_process(self):
         self.clean_auto_funcs()

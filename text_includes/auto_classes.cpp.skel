@@ -9,4 +9,13 @@ namespace AutoClass {
 
 namespace AutoGenerator {
   //<<<generators>>>
+
+  std::vector<std::function<std::unique_ptr<BaseAutoFunction>()>> GetAutoGenerators() {
+    std::vector<std::function<std::unique_ptr<BaseAutoFunction>()>> return_vector;
+
+    //<<<addgenerators>>>
+
+    return return_vector;
+
+  }
 }

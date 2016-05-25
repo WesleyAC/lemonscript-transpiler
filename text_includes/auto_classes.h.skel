@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <functional>
+#include <memory>
 
 
 //<<<include>>>
@@ -29,7 +30,7 @@ namespace AutoClass {
 namespace AutoGenerator {
   //<<<generators>>>
 
-  std::vector<std::function<BaseAutoFunction(CitrusRobot*,std::vector<void *>)>> auto_functions;
+  std::vector<std::function<std::unique_ptr<BaseAutoFunction>()>> GetAutoGenerators();
 }
 
 #endif
