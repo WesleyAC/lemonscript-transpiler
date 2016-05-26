@@ -3,6 +3,10 @@
 
 #include "auto_functions.h"
 
+//<<<convert>>>
+
+
+
 namespace AutoClass {
   //<<<classes>>>
 }

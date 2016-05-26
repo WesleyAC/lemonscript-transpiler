@@ -13,9 +13,6 @@
 //<<<include>>>
 
 
-//<<<convert>>>
-
-
 class BaseAutoFunction {
   public:
     bool Init(CitrusRobot *robot, std::vector<void *>);
