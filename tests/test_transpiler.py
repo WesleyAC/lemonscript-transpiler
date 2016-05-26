@@ -1,5 +1,6 @@
 import os
 import subprocess
+import shutil
 
 import transpiler
 
@@ -83,3 +84,15 @@ class TestTranspiler:
         assert len(auto_files) == 1
         assert "Wait" in [auto_file.get_name() for auto_file in auto_files]
 
+    def test_transpiler_deterministic_outupt(self):
+        self.clean_auto_funcs()
+
+        shutil.rmtree("/tmp/auto_files")
+        os.mkdir("/tmp/auto_files")
+
+        for n in range(1,10):
+            os.mkdir("/tmp/auto_files/{}".format(n))
+            transpiler.main(["--format", "--input-dir", "tests/files/transpiler/auto_functions_compile", "--output-dir", "/tmp/auto_files/{}".format(n)])
+
+        for n in range(1,9):
+            assert subprocess.check_output(["diff", "/tmp/auto_files/{}".format(n), "/tmp/auto_files/{}".format(n+1)]).decode("utf-8") == ""
