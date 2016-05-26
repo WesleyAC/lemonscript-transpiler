@@ -91,26 +91,12 @@ class Function(object):
         raw_code = self.get_section(section)
         var_init_lines = []
 
-        cast_functions = {
-            "int":                 "ConvertArgs::ls_convert_int({})",
-            "bool":                "ConvertArgs::ls_convert_bool({})",
-            "float":               "ConvertArgs::ls_convert_float({})",
-            "std::string":         "ConvertArgs::ls_convert_string({})",
-            "Time":                "ConvertArgs::ls_convert_time({})",
-            "Distance":            "ConvertArgs::ls_convert_distance({})",
-            "Length":              "ConvertArgs::ls_convert_distance({})",
-            "Angle":               "ConvertArgs::ls_convert_angle({})",
-            "Velocity":            "ConvertArgs::ls_convert_velocity({})",
-            "Acceleration":        "ConvertArgs::ls_convert_acceleration({})",
-            "AngularVelocity":     "ConvertArgs::ls_convert_angularvelocity({})",
-            "Voltage":             "ConvertArgs::ls_convert_voltage({})"
-        }
-
         argnum = 0
 
         if len(self.get_args()) > 0:
             for arg in self.get_args():
-                var_cast_func = cast_functions[arg[0]].format("ls_arg_list[{}]".format(argnum))
+                var_cast_func = "ConvertArgs::ls_convert<{type}>(ls_arg_list[{argnum}])" \
+                        .format(type = arg[0], argnum = argnum)
                 var_init_line = "  {arg[0]} {arg[1]} = {cast};".format(arg=arg, cast=var_cast_func)
                 var_init_lines.append(var_init_line)
                 argnum += 1

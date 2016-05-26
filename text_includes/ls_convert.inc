@@ -2,37 +2,48 @@
 
 //TODO(Wesley) Don't do this every tick
 namespace ConvertArgs {
-int ls_convert_int(void *arg) {
-  return *((int *)arg);
+template<typename T>
+T ls_convert(void* arg) {
+  return *static_cast<T*>(arg);
 }
-bool ls_convert_bool(void *arg) {
-  return *((bool *)arg);
+
+template<>
+Time ls_convert<Time>(void* arg) {
+  return ls_convert<NT>(arg) * s;
 }
-float ls_convert_float(void *arg) {
-  return *((float *)arg);
+
+template<>
+Length ls_convert<Length>(void* arg) {
+  return ls_convert<NT>(arg) * m;
 }
-std::string ls_convert_string(void *arg) {
-  return *((std::string *)arg);
+
+template<>
+Velocity ls_convert<Velocity>(void* arg) {
+  return ls_convert<NT>(arg) * (m / s);
 }
-Time ls_convert_time(void *arg) {
-  return ls_convert_float(arg) * s;
+
+template<>
+Acceleration ls_convert<Acceleration>(void* arg) {
+  return ls_convert<NT>(arg) * (m / (s * s));
 }
-Distance ls_convert_distance(void *arg) {
-  return ls_convert_float(arg) * m;
+
+template<>
+Angle ls_convert<Angle>(void* arg) {
+  return ls_convert<NT>(arg) * rad;
 }
-Angle ls_convert_angle(void *arg) {
-  return ls_convert_float(arg) * rad;
+
+template<>
+AngularVelocity ls_convert<AngularVelocity>(void* arg) {
+  return ls_convert<NT>(arg) * (rad / s);
 }
-Velocity ls_convert_velocity(void *arg) {
-  return ls_convert_float(arg) * (m / s);
+
+template<>
+AngularAcceleration ls_convert<AngularAcceleration>(void* arg) {
+  return ls_convert<NT>(arg) * (rad / (s * s));
 }
-Acceleration ls_convert_acceleration(void *arg) {
-  return ls_convert_float(arg) * (m / (s * s));
-}
-AngularVelocity ls_convert_angularvelocity(void *arg) {
-  return ls_convert_float(arg) * (rad / s);
-}
-Voltage ls_convert_voltage(void *arg) {
-  return ls_convert_float(arg) * V;
+
+template<>
+CitrusRobot* ls_convert<CitrusRobot*>(void* arg) {
+  return static_cast<CitrusRobot*>(arg);
 }
 }
