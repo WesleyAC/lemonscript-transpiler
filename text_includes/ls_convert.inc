@@ -2,48 +2,28 @@
 
 //TODO(Wesley) Don't do this every tick
 namespace ConvertArgs {
+
+// These operators are in structs because C++ doesn't support
+// partial function overloading, which is needed to specialize
+// on Units<U1, U2, U3, U4>
 template<typename T>
-T ls_convert(void* arg) {
-  return *static_cast<T*>(arg);
-}
+struct Convert {
+  T operator()(void* arg) {
+    return *static_cast<T*>(arg);
+  }
+};
 
-template<>
-Time ls_convert<Time>(void* arg) {
-  return ls_convert<NT>(arg) * s;
-}
+template<int U1, int U2, int U3, int U4>
+struct Convert<Units<U1, U2, U3, U4>> {
+  Units<U1, U2, U3, U4> operator()(void *arg) {
+    return Convert<NT>()(arg) * Units<U1, U2, U3, U4>(1);
+  }
+};
 
-template<>
-Length ls_convert<Length>(void* arg) {
-  return ls_convert<NT>(arg) * m;
-}
-
-template<>
-Velocity ls_convert<Velocity>(void* arg) {
-  return ls_convert<NT>(arg) * (m / s);
-}
-
-template<>
-Acceleration ls_convert<Acceleration>(void* arg) {
-  return ls_convert<NT>(arg) * (m / (s * s));
-}
-
-template<>
-Angle ls_convert<Angle>(void* arg) {
-  return ls_convert<NT>(arg) * rad;
-}
-
-template<>
-AngularVelocity ls_convert<AngularVelocity>(void* arg) {
-  return ls_convert<NT>(arg) * (rad / s);
-}
-
-template<>
-AngularAcceleration ls_convert<AngularAcceleration>(void* arg) {
-  return ls_convert<NT>(arg) * (rad / (s * s));
-}
-
-template<>
-CitrusRobot* ls_convert<CitrusRobot*>(void* arg) {
-  return static_cast<CitrusRobot*>(arg);
-}
+template<typename T>
+struct Convert<T*>{
+  T* operator()(void* arg) {
+    return static_cast<T*>(arg);
+  }
+};
 }
