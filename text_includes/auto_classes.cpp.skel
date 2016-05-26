@@ -10,12 +10,12 @@ namespace AutoClass {
 namespace AutoGenerator {
   //<<<generators>>>
 
-  std::vector<std::function<std::unique_ptr<BaseAutoFunction>()>> GetAutoGenerators() {
-    std::vector<std::function<std::unique_ptr<BaseAutoFunction>()>> return_vector;
+  std::map<std::string, std::function<std::unique_ptr<BaseAutoFunction>()>> GetAutoGenerators() {
+    std::map<std::string, std::function<std::unique_ptr<BaseAutoFunction>()>> return_map;
 
     //<<<addgenerators>>>
 
-    return return_vector;
+    return return_map;
 
   }
 }

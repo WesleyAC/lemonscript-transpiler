@@ -7,6 +7,7 @@
 #include <vector>
 #include <functional>
 #include <memory>
+#include <map>
 
 
 //<<<include>>>
@@ -30,7 +31,7 @@ namespace AutoClass {
 namespace AutoGenerator {
   //<<<generators>>>
 
-  std::vector<std::function<std::unique_ptr<BaseAutoFunction>()>> GetAutoGenerators();
+  std::map<std::string, std::function<std::unique_ptr<BaseAutoFunction>()>> GetAutoGenerators();
 }
 
 #endif
