@@ -1,6 +1,8 @@
 #ifndef BASE_CLASS_H_
 #define BASE_CLASS_H_
 
+class CitrusRobot;
+
 class BaseAutoFunction {
   public:
     bool Init(CitrusRobot *robot, std::vector<void *>);
