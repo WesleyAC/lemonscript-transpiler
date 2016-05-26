@@ -58,12 +58,12 @@ class TestFunctionMethods:
         test_text = test_file.read()
         test_file.close()
         test_results = [
-            [],
-            [["int", "i"]],
-            [],
-            [["int", "i"], ["Time", "t"]],
-            [],
-            [["int", "i"], ["Time", "t"]]
+            [['CitrusRobot *', 'robot']],
+            [['CitrusRobot *', 'robot'], ["int", "i"]],
+            [['CitrusRobot *', 'robot']],
+            [['CitrusRobot *', 'robot'], ["int", "i"], ["Time", "t"]],
+            [['CitrusRobot *', 'robot']],
+            [['CitrusRobot *', 'robot'], ["int", "i"], ["Time", "t"]]
         ]
 
         n = 0

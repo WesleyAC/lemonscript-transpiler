@@ -2,8 +2,8 @@
 
 class <<<name>>>Class : public BaseAutoFunction {
   public:
-    bool Init(CitrusRobot *robot, std::vector<void *> ls_arg_list);
-    bool Periodic(CitrusRobot *robot, std::vector<void *> ls_arg_list);
+    bool Init(std::vector<void *> ls_arg_list);
+    bool Periodic(std::vector<void *> ls_arg_list);
   private:
     //<<<vars>>>
 };
