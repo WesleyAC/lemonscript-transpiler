@@ -13,13 +13,6 @@
 //<<<include>>>
 
 
-class BaseAutoFunction {
-  public:
-    bool Init(CitrusRobot *robot, std::vector<void *>);
-    bool Periodic(CitrusRobot *robot, std::vector<void *>);
-  private:
-    //none
-};
 
 namespace AutoClass {
   //<<<classes>>>

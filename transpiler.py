@@ -34,7 +34,6 @@ def generate_auto_functions(auto_function_objects):
         auto_classes_cpp_file.insert_text("generators", auto_function.get_generator()[1])
         auto_classes_cpp_file.insert_text("addgenerators", File(open(get_script_dir() + "text_includes/add_to_return_vector.skel").read(), [["replace_text", "name", auto_function.get_name()], ["replace_text", "args", "-".join([argl[0] for argl in auto_function.get_args()])]]).text)
 
-    includes = list(set(includes)) # remove duplicates
     includes = ["#include " + name for name in includes]
     auto_classes_h_file.insert_text("include", "\n".join(includes))
     auto_classes_cpp_file.replace_file("convert", get_script_dir() + "text_includes/ls_convert.inc")

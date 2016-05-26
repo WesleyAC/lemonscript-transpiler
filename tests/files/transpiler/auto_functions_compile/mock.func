@@ -1,8 +1,9 @@
 Wait(Time time)
 
 include {
-  "tests/files/transpiler/mock_code.h"
   "tests/files/transpiler/unitscpp.h"
+  "tests/files/transpiler/mock_code.h"
+  "tests/files/transpiler/base_class.h"
 }
 
 global {
