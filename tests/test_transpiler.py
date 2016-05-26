@@ -8,6 +8,7 @@ class TestTranspiler:
 
     def clean_auto_funcs(self):
         try:
+            shutil.rmtree("/tmp/auto_files")
             os.remove("/tmp/auto_functions.cpp")
             os.remove("/tmp/auto_functions.h")
             os.remove("auto_functions.cpp")
@@ -87,7 +88,6 @@ class TestTranspiler:
     def test_transpiler_deterministic_outupt(self):
         self.clean_auto_funcs()
 
-        shutil.rmtree("/tmp/auto_files")
         os.mkdir("/tmp/auto_files")
 
         for n in range(1,10):
