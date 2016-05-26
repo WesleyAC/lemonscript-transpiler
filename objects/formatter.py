@@ -32,7 +32,11 @@ class Formatter(object):
             "/usr/bin/clang-format",
             "/usr/bin/clang-format-3.7",
             "/usr/bin/clang-format-3.6",
-            "/usr/bin/clang-format-3.5"
+            "/usr/bin/clang-format-3.5",
+            "/usr/local/bin/clang-format",
+            "/usr/local/bin/clang-format-3.7",
+            "/usr/local/local/bin/clang-format-3.6",
+            "/usr/local/local/bin/clang-format-3.5"
         ]
 
         for path in possible_paths:
