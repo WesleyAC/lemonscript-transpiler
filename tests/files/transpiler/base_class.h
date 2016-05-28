@@ -5,8 +5,8 @@ class CitrusRobot;
 
 class BaseAutoFunction {
   public:
-    bool Init(CitrusRobot *robot, std::vector<void *>);
-    bool Periodic(CitrusRobot *robot, std::vector<void *>);
+    bool Init(std::vector<void *>);
+    bool Periodic(std::vector<void *>);
   private:
     //none
 };
