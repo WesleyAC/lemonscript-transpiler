@@ -1,13 +1,12 @@
-Wait(Time time)
+Wait(float time)
 
 include {
-  "tests/files/transpiler/unitscpp.h"
   "tests/files/transpiler/mock_code.h"
   "tests/files/transpiler/base_class.h"
 }
 
 global {
-  Time start_time
+  float start_time
 }
 
 init {
@@ -16,5 +15,5 @@ init {
 }
 
 periodic {
-  return 0 * s - time > start_time;
+  return time > start_time; // This makes no sense, but whatever
 }

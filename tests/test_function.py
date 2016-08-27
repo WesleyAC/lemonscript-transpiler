@@ -61,9 +61,9 @@ class TestFunctionMethods:
             [['CitrusRobot *', 'robot']],
             [['CitrusRobot *', 'robot'], ["int", "i"]],
             [['CitrusRobot *', 'robot']],
-            [['CitrusRobot *', 'robot'], ["int", "i"], ["Time", "t"]],
+            [['CitrusRobot *', 'robot'], ["int", "i"], ["float", "t"]],
             [['CitrusRobot *', 'robot']],
-            [['CitrusRobot *', 'robot'], ["int", "i"], ["Time", "t"]]
+            [['CitrusRobot *', 'robot'], ["int", "i"], ["std::string", "t"]]
         ]
 
         n = 0

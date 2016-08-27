@@ -1,11 +1,11 @@
-Wait(Time time)
+Wait(float time)
 
 include {
   "muan/utils/timing_utils.h"
 }
 
 init {
-  Time start_time = lemon_var("start_time", muan::now());
+  float start_time = lemon_var("start_time", muan::now());
   return false;
 }
 

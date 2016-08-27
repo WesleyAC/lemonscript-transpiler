@@ -7,14 +7,14 @@ This is a script that converts .func files into a .h and .cpp file to be used wi
 `transpile.py` takes in a directory containing all the `.func` files that you want to compile, and outputs a `auto_functions.cpp` and `auto_functions.h` file to be used in the robot code. Here's an example of a valid `.func` file:
 
 ```
-Wait(Time time)
+Wait(float time)
 
 include {
   "muan/utils/timing_utils.h"
 }
 
 global {
-  Time start_time
+  float start_time
 }
 
 init {
@@ -42,14 +42,6 @@ Lemonscript treats all arguments as void pointers, and internally converts them 
 * `bool`
 * `float`
 * `std::string`
-* `Time`
-* `Distance`
-* `Length`
-* `Angle`
-* `Velocity`
-* `Acceleration`
-* `AngularVelocity`
-* `Voltage`
 
 ##Arguments
 
