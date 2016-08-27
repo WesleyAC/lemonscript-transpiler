@@ -54,3 +54,17 @@ Lemonscript treats all arguments as void pointers, and internally converts them 
 | `--format`     | Use `clang-format` to make the generated code pretty. |
 | `-v`           | Sets log level to be more verbose. You may use more than one, but the default is everything but debug, so that's pretty useless. |
 | `-q`           | Sets log level to be less verbose. You may use more than one. For example `-qq` will hide everything except errors. `-qqq` **should** result in no output to stdout. |
+
+##Testing
+
+To simply run the tests:
+
+```
+py.test ./tests
+```
+
+If you want coverage information as well:
+
+```
+coverage run -m py.test ./tests/
+```
