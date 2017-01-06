@@ -20,7 +20,7 @@ class TestTranspiler:
     def test_transpiler_creates_files_without_format(self):
         self.clean_auto_funcs()
 
-        transpiler.main(["--output-file", "/tmp/auto_functions"])
+        transpiler.main(["--output-cpp", "/tmp/auto_functions.cpp", "--output-header", "/tmp/auto_functions.h"])
 
         assert os.path.isfile("/tmp/auto_functions.cpp")
         assert os.path.isfile("/tmp/auto_functions.h")
@@ -28,7 +28,7 @@ class TestTranspiler:
     def test_transpiler_creates_files_with_format(self):
         self.clean_auto_funcs()
 
-        transpiler.main(["--format", "--output-file", "/tmp/auto_functions"])
+        transpiler.main(["--format", "--output-cpp", "/tmp/auto_functions.cpp", "--output-header", "/tmp/auto_functions.h"])
 
         assert os.path.isfile("/tmp/auto_functions.cpp")
         assert os.path.isfile("/tmp/auto_functions.h")
@@ -36,7 +36,7 @@ class TestTranspiler:
     def test_transpiler_uses_input_files(self):
         self.clean_auto_funcs()
 
-        transpiler.main(["--format", "--output-file", "/tmp/auto_functions", "--input-files", "tests/files/transpiler/auto_functions/wait.func"])
+        transpiler.main(["--format", "--output-cpp", "/tmp/auto_functions.cpp", "--output-header", "/tmp/auto_functions.h", "--input-files", "tests/files/transpiler/auto_functions/wait.func"])
 
         assert os.path.isfile("/tmp/auto_functions.cpp")
         assert os.path.isfile("/tmp/auto_functions.h")
@@ -68,7 +68,7 @@ class TestTranspiler:
     def test_run_transpiler_as_process(self):
         self.clean_auto_funcs()
 
-        subprocess.check_call(["./transpiler.py", "--format", "--input-files", "tests/files/transpiler/auto_functions/wait.func", "--output-file", "/tmp/auto_functions"])
+        subprocess.check_call(["./transpiler.py", "--format", "--input-files", "tests/files/transpiler/auto_functions/wait.func", "--output-cpp", "/tmp/auto_functions.cpp", "--output-header", "/tmp/auto_functions.h"])
 
         assert os.path.isfile("/tmp/auto_functions.cpp")
         assert os.path.isfile("/tmp/auto_functions.h")
@@ -78,7 +78,7 @@ class TestTranspiler:
     def test_transpiler_silent_flag(self):
         self.clean_auto_funcs()
 
-        assert subprocess.check_output(["./transpiler.py", "-qqq", "--output-file", "/tmp/auto_functions"]).decode("utf-8") == ""
+        assert subprocess.check_output(["./transpiler.py", "-qqq", "--output-cpp", "/tmp/auto_functions.cpp", "--output-header", "/tmp/auto_functions.h"]).decode("utf-8") == ""
 
     def test_transpiler_deterministic_outupt(self):
         self.clean_auto_funcs()
@@ -87,7 +87,7 @@ class TestTranspiler:
 
         for n in range(1,10):
             os.mkdir("/tmp/auto_files/{}".format(n))
-            transpiler.main(["--format", "--input-files", "tests/files/transpiler/auto_functions_compile/mock.func", "--output-file", "/tmp/auto_files/{}".format(n)])
+            transpiler.main(["--format", "--input-files", "tests/files/transpiler/auto_functions_compile/mock.func", "--output-cpp", "/tmp/auto_files/{}.cpp".format(n), "--output-header", "/tmp/auto_files/{}.h".format(n)])
 
         for n in range(1,9):
             assert subprocess.check_output(["diff", "/tmp/auto_files/{}".format(n), "/tmp/auto_files/{}".format(n+1)]).decode("utf-8") == ""

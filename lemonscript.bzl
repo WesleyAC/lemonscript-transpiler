@@ -9,10 +9,11 @@ def cc_lemonscript_library(
     name = name + '_genrule',
     srcs = srcs,
     tools = [transpiler],
-    cmd = '$(location %s) --input-files %s --output-file $(location %s)' % (
+    cmd = '$(location %s) --input-files %s --output-cpp $(location %s) --output-header $(location %s)' % (
         transpiler,
         ' '.join(['$(location %s)' % s for s in srcs]),
-        name),
+        name + '.cpp',
+        name + '.h'),
     outs = [name + '.cpp', name + '.h'],
   )
 
@@ -22,5 +23,6 @@ def cc_lemonscript_library(
     hdrs = [name + '.h'],
     deps = [
       lemonscript,
+      '//muan/units',
     ] + deps,
-  )
+)

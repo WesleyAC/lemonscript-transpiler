@@ -36,9 +36,9 @@ def get_script_dir():
     return os.path.dirname(os.path.realpath(__file__)) + "/"
 
 def parse_args(args=None):
-    #TODO(Wesley) Edit readme to show these
     parser = argparse.ArgumentParser(description="Convert Lemonscript .func files to C++ code")
-    parser.add_argument("--output-file", default="./auto_functions", help="Set the file to write the code to, without the .cpp or .h extension")
+    parser.add_argument("--output-cpp", default="./auto_functions.cpp", help="Set the file to write the .cpp code to")
+    parser.add_argument("--output-header", default="./auto_functions.h", help="Set the file to write the .h code to")
     parser.add_argument("--input-files", default="", nargs="*", help="Set the .func files to transpile")
     parser.add_argument("--format", action="store_true", help="Run clang-format on outputted code")
     parser.add_argument("--verbose", "-v", action="count", default=0, help="Show more debug info")
@@ -52,8 +52,8 @@ def main(arg_list=None):
     Logger.debug("Arguments: {}".format(args))
     auto_functions = [Function(open(function_file).read(), get_script_dir()) for function_file in args["input_files"]]
     Logger.info("Found auto functions: {}".format([func.get_name() for func in auto_functions]))
-    cpp_file = open(args["output_file"] + ".cpp", "w")
-    h_file = open(args["output_file"] + ".h", "w")
+    cpp_file = open(args["output_cpp"], "w")
+    h_file = open(args["output_header"], "w")
 
     compiled_auto_functions = generate_auto_functions(auto_functions)
 

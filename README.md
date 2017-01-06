@@ -47,13 +47,14 @@ Lemonscript treats all arguments as void pointers, and internally converts them 
 
 `transpile.py` has the following flags:
 
-| flag            | function |
-| --------------- | -------- |
-| `--input-files` | A list of `.func` files to compile. |
-| `--output-file` | A name of a file to put the transpiled .cpp and .h files in, without the file extension. |
-| `--format`      | Use `clang-format` to make the generated code pretty. |
-| `-v`            | Sets log level to be more verbose. You may use more than one, but the default is everything but debug, so that's pretty useless. |
-| `-q`            | Sets log level to be less verbose. You may use more than one. For example `-qq` will hide everything except errors. `-qqq` **should** result in no output to stdout. |
+| flag              | function |
+| ----------------- | -------- |
+| `--input-files`   | A list of `.func` files to compile. |
+| `--output-header` | A name of a file to put the transpiled .cpp code in. |
+| `--output-cpp`    | A name of a file to put the transpiled .h code in. |
+| `--format`        | Use `clang-format` to make the generated code pretty. |
+| `-v`              | Sets log level to be more verbose. You may use more than one, but the default is everything but debug, so that's pretty useless. |
+| `-q`              | Sets log level to be less verbose. You may use more than one. For example `-qq` will hide everything except errors. `-qqq` **should** result in no output to stdout. |
 
 ##Testing
 
