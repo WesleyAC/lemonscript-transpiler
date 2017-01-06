@@ -9,11 +9,10 @@ def cc_lemonscript_library(
     name = name + '_genrule',
     srcs = srcs,
     tools = [transpiler],
-    cmd = '$(location %s) %s --source $(location %s) --header $(location %s)' % (
+    cmd = '$(location %s) --input-files %s --output-file $(location %s)' % (
         transpiler,
         ' '.join(['$(location %s)' % s for s in srcs]),
-        name + '.cpp',
-        name + '.h'),
+        name),
     outs = [name + '.cpp', name + '.h'],
   )
 

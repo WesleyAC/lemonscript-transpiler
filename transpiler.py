@@ -8,15 +8,6 @@ from objects.file import File
 from objects.formatter import Formatter
 from objects.logger import Logger
 
-def enumerate_auto_files(path):
-    if not path[-1] == "/":
-        path += "/"
-    auto_function_files = []
-
-    for function_file in glob.glob(os.path.join(path, "*.func")):
-        auto_function_files.append(Function(open(function_file).read(), get_script_dir()))
-    return auto_function_files
-
 def generate_auto_functions(auto_function_objects):
     replacements = [
         ["replace_file", "warning", get_script_dir() + "text_includes/warning.inc"]
@@ -45,9 +36,10 @@ def get_script_dir():
     return os.path.dirname(os.path.realpath(__file__)) + "/"
 
 def parse_args(args=None):
+    #TODO(Wesley) Edit readme to show these
     parser = argparse.ArgumentParser(description="Convert Lemonscript .func files to C++ code")
-    parser.add_argument("--output-dir", default="./", help="Set the directory to output the .cpp and .h files in")
-    parser.add_argument("--input-dir", default="auto_functions", help="Set the directory to read the .func files from")
+    parser.add_argument("--output-file", default="./auto_functions", help="Set the file to write the code to, without the .cpp or .h extension")
+    parser.add_argument("--input-files", default="", nargs="*", help="Set the .func files to transpile")
     parser.add_argument("--format", action="store_true", help="Run clang-format on outputted code")
     parser.add_argument("--verbose", "-v", action="count", default=0, help="Show more debug info")
     parser.add_argument("--quiet", "-q", action="count", default=0, help="Show less debug info")
@@ -58,14 +50,10 @@ def main(arg_list=None):
     Logger.show_log_levels += args["verbose"] - args["quiet"]
     Logger.debug("Log level: {}".format(Logger.show_log_levels))
     Logger.debug("Arguments: {}".format(args))
-    auto_functions = enumerate_auto_files(args["input_dir"])
+    auto_functions = [Function(open(function_file).read(), get_script_dir()) for function_file in args["input_files"]]
     Logger.info("Found auto functions: {}".format([func.get_name() for func in auto_functions]))
-    output_path = args["output_dir"]
-    if output_path[-1] != "/":
-        output_path += "/"
-
-    cpp_file = open(output_path + "auto_functions.cpp", "w")
-    h_file = open(output_path + "auto_functions.h", "w")
+    cpp_file = open(args["output_file"] + ".cpp", "w")
+    h_file = open(args["output_file"] + ".h", "w")
 
     compiled_auto_functions = generate_auto_functions(auto_functions)
 
