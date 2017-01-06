@@ -95,7 +95,7 @@ class Function(object):
 
         if len(self.get_args()) > 0:
             for arg in self.get_args():
-                var_cast_func = "ConvertArgs::Convert<{type}>()(ls_arg_list[{argnum}])" \
+                var_cast_func = "ConvertArgs::Convert<{type}>()(ls_arg_list[{argnum}+1])" \
                         .format(type = arg[0], argnum = argnum)
                 var_init_line = "  {arg[0]} {arg[1]} = {cast};".format(arg=arg, cast=var_cast_func)
                 var_init_lines.append(var_init_line)
