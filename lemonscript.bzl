@@ -23,6 +23,5 @@ def cc_lemonscript_library(
     hdrs = [name + '.h'],
     deps = [
       lemonscript,
-      '//muan/units',
     ] + deps,
   )
