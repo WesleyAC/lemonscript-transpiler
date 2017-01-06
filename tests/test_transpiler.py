@@ -82,8 +82,9 @@ class TestTranspiler:
 
     def test_enumerate_auto_files(self):
         auto_files = transpiler.enumerate_auto_files("tests/files/transpiler/auto_functions")
-        assert len(auto_files) == 1
+        assert len(auto_files) == 2
         assert "Wait" in [auto_file.get_name() for auto_file in auto_files]
+        assert "Example" in [auto_file.get_name() for auto_file in auto_files]
 
     def test_transpiler_deterministic_outupt(self):
         self.clean_auto_funcs()
