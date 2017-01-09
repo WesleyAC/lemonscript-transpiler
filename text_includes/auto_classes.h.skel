@@ -8,7 +8,9 @@
 #include <functional>
 #include <memory>
 #include <map>
+#include "third_party/lemonscript/lemonscript/BaseAutoFunction.h"
 
+using lemonscript::BaseAutoFunction;
 
 //<<<include>>>
 

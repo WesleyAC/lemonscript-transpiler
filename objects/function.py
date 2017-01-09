@@ -133,7 +133,7 @@ class Function(object):
                 arg_pair = [arg.strip().split(" ")[0], arg.strip().split(" ")[-1]]
                 args.append(arg_pair)
 
-        args.insert(0, ["CitrusRobot *", "robot"])
+        # args.insert(0, ["CitrusRobot *", "robot"])
         return args
 
     def get_raw_constructor(self):

@@ -58,12 +58,12 @@ class TestFunctionMethods:
         test_text = test_file.read()
         test_file.close()
         test_results = [
-            [['CitrusRobot *', 'robot']],
-            [['CitrusRobot *', 'robot'], ["int", "i"]],
-            [['CitrusRobot *', 'robot']],
-            [['CitrusRobot *', 'robot'], ["int", "i"], ["float", "t"]],
-            [['CitrusRobot *', 'robot']],
-            [['CitrusRobot *', 'robot'], ["int", "i"], ["std::string", "t"]]
+            [],
+            [["int", "i"]],
+            [],
+            [["int", "i"], ["float", "t"]],
+            [],
+            [["int", "i"], ["std::string", "t"]]
         ]
 
         n = 0

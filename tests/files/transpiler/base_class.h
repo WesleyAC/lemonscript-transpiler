@@ -3,6 +3,8 @@
 
 class CitrusRobot;
 
+namespace lemonscript {
+
 class BaseAutoFunction {
   public:
     bool Init(std::vector<void *>);
@@ -10,5 +12,7 @@ class BaseAutoFunction {
   private:
     //none
 };
+
+}
 
 #endif
