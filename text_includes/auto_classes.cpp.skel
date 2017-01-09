@@ -1,7 +1,7 @@
 // vim: filetype=cpp:
 <<<warning>>>
 
-#include "auto_functions.h"
+#include "<<<h_file>>>"
 
 //<<<convert>>>
 

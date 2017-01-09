@@ -8,7 +8,7 @@ from objects.file import File
 from objects.formatter import Formatter
 from objects.logger import Logger
 
-def generate_auto_functions(auto_function_objects):
+def generate_auto_functions(auto_function_objects, h_file_name):
     replacements = [
         ["replace_file", "warning", get_script_dir() + "text_includes/warning.inc"]
     ]
@@ -16,6 +16,8 @@ def generate_auto_functions(auto_function_objects):
 
     auto_classes_h_file = File(open(get_script_dir() + "text_includes/auto_classes.h.skel").read(), replacements)
     auto_classes_cpp_file = File(open(get_script_dir() + "text_includes/auto_classes.cpp.skel").read(), replacements)
+
+    auto_classes_cpp_file.replace_text("h_file", h_file_name)
 
     for auto_function in auto_function_objects:
         includes += auto_function.get_includes()
@@ -55,7 +57,7 @@ def main(arg_list=None):
     cpp_file = open(args["output_cpp"], "w")
     h_file = open(args["output_header"], "w")
 
-    compiled_auto_functions = generate_auto_functions(auto_functions)
+    compiled_auto_functions = generate_auto_functions(auto_functions, args["output_header"])
 
     if args["format"]:
         Logger.info("Formatting output files")
