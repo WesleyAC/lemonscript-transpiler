@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+from pytest import raises
 
 parent_dir = os.path.dirname(os.path.realpath(__file__)) + "/../"
 sys.path.append(parent_dir) # a bit of a hack, but it makes the import the same
@@ -18,35 +19,43 @@ class TestLoggerMethods:
         return subprocess.check_output(command).decode("utf-8")
 
     def test_default_loglevel(self):
-        assert "test_passed" in self.get_log_output("error", "test_passed")
+        with raises(subprocess.CalledProcessError):
+            assert "test_passed" in self.get_log_output("error", "test_passed")
+        
         assert "test_passed" in self.get_log_output("warn", "test_passed")
         assert "test_passed" in self.get_log_output("info", "test_passed")
         assert not "test_failed" in self.get_log_output("debug", "test_failed")
 
     def test_all_loglevel(self):
-        assert "test_passed" in self.get_log_output("error", "test_passed", 4)
+        with raises(subprocess.CalledProcessError):
+            assert "test_passed" in self.get_log_output("error", "test_passed", 4)
+        
         assert "test_passed" in self.get_log_output("warn", "test_passed", 4)
         assert "test_passed" in self.get_log_output("info", "test_passed", 4)
         assert "test_passed" in self.get_log_output("debug", "test_passed", 4)
 
     def test_none_loglevel(self):
-        assert not "test_failed" in self.get_log_output("error", "test_failed", -1)
+        with raises(subprocess.CalledProcessError):
+            assert not "test_failed" in self.get_log_output("error", "test_failed", -1)
+        
         assert not "test_failed" in self.get_log_output("warn", "test_failed", -1)
         assert not "test_failed" in self.get_log_output("info", "test_failed", -1)
         assert not "test_failed" in self.get_log_output("debug", "test_failed", -1)
 
     def test_log_type_all(self):
-        assert "ERROR" in self.get_log_output("error", "test", 4)
+        with raises(subprocess.CalledProcessError):
+            assert "ERROR" in self.get_log_output("error", "test", 4)
+        
         assert "WARN" in self.get_log_output("warn", "test", 4)
         assert "INFO" in self.get_log_output("info", "test", 4)
         assert "DEBUG" in self.get_log_output("debug", "test", 4)
 
     def test_log_non_strings(self):
-        Logger.error(1)
-        Logger.error(-1)
-        Logger.error(0.3)
-        Logger.error(["a", "b", "c"])
-        Logger.error([1, 2, 3])
-        Logger.error({"test": 1, "asdf": "arst"})
-        Logger.error(Logger)
-        Logger.error(Logger.error)
+        Logger.info(1)
+        Logger.info(-1)
+        Logger.info(0.3)
+        Logger.info(["a", "b", "c"])
+        Logger.info([1, 2, 3])
+        Logger.info({"test": 1, "asdf": "arst"})
+        Logger.info(Logger)
+        Logger.info(Logger.error)

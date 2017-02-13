@@ -22,6 +22,7 @@ class Logger(object):
     @classmethod
     def error(logger_class, message):
         logger_class._log(message, 0)
+        exit(1)
 
     @classmethod
     def warn(logger_class, message):

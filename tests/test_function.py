@@ -63,7 +63,7 @@ class TestFunctionMethods:
             [],
             [["int", "i"], ["float", "t"]],
             [],
-            [["int", "i"], ["std::string", "t"]]
+            [["int", "i"], ["bool", "b"]]
         ]
 
         n = 0
