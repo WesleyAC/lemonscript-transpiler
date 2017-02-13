@@ -135,6 +135,8 @@ class Function(object):
             for arg in arg_string.split(","):
                 arg = arg.strip()
                 arg_pair = [arg.strip().split(" ")[0], arg.strip().split(" ")[-1]]
+                if arg_pair[0] not in ["float", "int", "bool"]:
+                    Logger.error("Invalid parameter type {0}!".format(arg_pair[0]))
                 args.append(arg_pair)
 
         # args.insert(0, ["CitrusRobot *", "robot"])
