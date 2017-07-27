@@ -1,8 +1,8 @@
-#lemonscript-transpiler [![Build Status](https://travis-ci.org/WesleyAC/lemonscript-transpiler.svg)](https://travis-ci.org/WesleyAC/lemonscript-transpiler) [![Coverage Status](https://coveralls.io/repos/github/WesleyAC/lemonscript-transpiler/badge.svg?branch=master)](https://coveralls.io/github/WesleyAC/lemonscript-transpiler?branch=master) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+# lemonscript-transpiler [![Build Status](https://travis-ci.org/WesleyAC/lemonscript-transpiler.svg)](https://travis-ci.org/WesleyAC/lemonscript-transpiler) [![Coverage Status](https://coveralls.io/repos/github/WesleyAC/lemonscript-transpiler/badge.svg?branch=master)](https://coveralls.io/github/WesleyAC/lemonscript-transpiler?branch=master) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 This is a script that converts .func files into a .h and .cpp file to be used with lemonscript.
 
-##`.func` file format
+## `.func` file format
 
 `transpile.py` takes in a directory containing all the `.func` files that you want to compile, and outputs a `auto_functions.cpp` and `auto_functions.h` file to be used in the robot code. Here's an example of a valid `.func` file:
 
@@ -34,7 +34,7 @@ A few things to keep in mind:
 * All files to include must be on a different line in the `include` block.
 * If you try to break the transpiler, you will be able to. It should handle any reasonable file, but don't try to break it.
 
-##Supported units
+## Supported units
 
 Lemonscript treats all arguments as void pointers, and internally converts them to the correct units. Because of this, only the following types are supported as arguments to auto functions:
 
@@ -43,7 +43,7 @@ Lemonscript treats all arguments as void pointers, and internally converts them 
 * `float`
 * `std::string`
 
-##Arguments
+## Arguments
 
 `transpile.py` has the following flags:
 
@@ -56,7 +56,7 @@ Lemonscript treats all arguments as void pointers, and internally converts them 
 | `-v`              | Sets log level to be more verbose. You may use more than one, but the default is everything but debug, so that's pretty useless. |
 | `-q`              | Sets log level to be less verbose. You may use more than one. For example `-qq` will hide everything except errors. `-qqq` **should** result in no output to stdout. |
 
-##Testing
+## Testing
 
 To simply run the tests:
 
